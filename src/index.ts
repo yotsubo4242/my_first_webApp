@@ -12,12 +12,22 @@
  */
 
 import { Hono } from "hono";
+import { basicAuth } from "hono/basic-auth";
 import { todos } from "./todos/api"
 
 const app = new Hono();
-// new Hono() で Hono インスタンスを作成. 
+// new Hono() で Hono インスタンスを作成.
 
-app.route("api/todos", todos);
+app.use(
+	"/api/*",
+	basicAuth({
+		username: "yotsubo",
+		password: "yeah",
+	})
+);
+// basic認証のミドルウェアを登録.
+
+app.route("/api/todos", todos);
 // `c`はContextオブジェクト. 
 
 export default app;

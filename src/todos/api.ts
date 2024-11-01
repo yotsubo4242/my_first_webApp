@@ -2,9 +2,9 @@ import { Hono } from "hono";
 import { compress } from "hono/compress";
 
 let todoList = [
-  { id: "1", title: "Learning Hono", completed: false },
-  { id: "2", title: "Watch the movie", completed: true },
-  { id: "3", title: "Buy milk", completed: false },
+	{ id: "1", title: "Learning Hono", completed: false },
+	{ id: "2", title: "Watch the movie", completed: true },
+	{ id: "3", title: "Buy milk", completed: false },
 ];
 
 const todos = new Hono();
