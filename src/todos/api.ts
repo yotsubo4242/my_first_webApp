@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { compress } from "hono/compress";
+import { Bindings } from "../bindings";
 
 let todoList = [
 	{ id: "1", title: "Learning Hono", completed: false },
@@ -7,9 +8,12 @@ let todoList = [
 	{ id: "3", title: "Buy milk", completed: false },
 ];
 
-const todos = new Hono();
+const todos = new Hono<Bindings>();
 
-todos.get("/", (c) => c.json(todoList));
+todos.get("/", (c) => {
+	c.env.HONO_TODO;
+	
+});
 
 todos.post("/", async (c) => {
 	const param = await c.req.json<{ title: string }>();

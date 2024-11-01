@@ -3,6 +3,9 @@ name = "hono-todo-app"
 main = "src/index.ts"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
+kv_namespaces = [
+	{binding = "HONO_TODO", preview_id = "9d9c5ba0fad644d1b396ab27fd2697c9"}
+]
 
 # Workers Logs
 # Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
