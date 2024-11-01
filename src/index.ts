@@ -11,8 +11,15 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
-	},
-} satisfies ExportedHandler<Env>;
+import { Hono } from "hono";
+
+const app = new Hono();
+// new Hono() で Hono インスタンスを作成. 
+
+app.get("/", (c) => c.text("Hello 🔥"));
+// `c`はContextオブジェクト. 
+
+export default app;
+// `app`というHonoインスタンスを公開する. 
+// これにより, Workersがリクエストを受け取れる. 
+// ここがアプリケーションのエントリーポイント. 
