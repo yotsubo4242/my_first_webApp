@@ -21,6 +21,31 @@ todos.post("/", async (c) => {
 	todoList = [...todoList, newTodo];
 
 	return c.json(newTodo, 201);
-})
+});
+
+todos.put("/:id", async (c) => {
+	const id = c.req.param("id");
+	const todo = todoList.find((todo) => todo.id === id);
+	if (!todo) {
+		return c.json({ message: "not found" }, 404);
+	}
+
+	const param = (await c.req.parseBody()) as {
+		title?: string;
+		completed?: boolean;
+	};
+	todoList = todoList.map((todo) => {
+		if (todo.id === id) {
+			return {
+				...todo,
+				...param,
+			};
+		} else {
+			return todo;
+		}
+	});
+
+	return new Response(null, { status: 204 });
+});
 
 export { todos };
