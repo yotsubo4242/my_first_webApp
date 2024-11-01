@@ -12,11 +12,12 @@
  */
 
 import { Hono } from "hono";
+import { todos } from "./todos/api"
 
 const app = new Hono();
 // new Hono() で Hono インスタンスを作成. 
 
-app.get("/", (c) => c.text("Hello 🔥"));
+app.route("api/todos", todos);
 // `c`はContextオブジェクト. 
 
 export default app;
