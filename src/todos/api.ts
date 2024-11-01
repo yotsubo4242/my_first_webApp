@@ -48,4 +48,15 @@ todos.put("/:id", async (c) => {
 	return new Response(null, { status: 204 });
 });
 
+todos.delete("/:id", async (c) => {
+	const id = c.req.param("id");
+	const todo = todoList.find((todo) => todo.id === id);
+	if (!todo) {
+		return c.json({ message: "not found" }, 404);
+	}
+	todoList = todoList.filter((todo) => todo.id !== id);
+
+	return new Response(null, { status: 204 });
+});
+
 export { todos };
